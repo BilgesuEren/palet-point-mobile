@@ -1,0 +1,7 @@
+tr:
+  detail:
+    proposal: 
+      row_1: "Talep Tarihi:"
+      row_2: "Termin:"
+      row_3: "Ödeme Vadesi:"
+      row_4: "Nakliye:"

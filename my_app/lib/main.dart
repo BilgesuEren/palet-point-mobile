@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_i18n/loaders/decoders/yaml_decode_strategy.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_app/theme/theme.dart';
 import 'package:my_app/view/splash_screen.dart';
 
 void main() {
@@ -13,10 +17,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        useMaterial3: true,
-      ),
+      theme:theme,
+      localizationsDelegates: [
+        FlutterI18nDelegate(
+          missingTranslationHandler: (key, locale) {
+            print(
+                "--- Missing Key: $key, languageCode: ${locale!.languageCode}");
+          },
+          translationLoader: FileTranslationLoader(
+              fallbackFile: 'tr',
+              basePath: 'assets/flutter_i18n',
+              forcedLocale: const Locale('tr'),
+              decodeStrategies: [YamlDecodeStrategy()],
+              useCountryCode: false),
+        ),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
       home: const SplashScreen(),
     );
   }
