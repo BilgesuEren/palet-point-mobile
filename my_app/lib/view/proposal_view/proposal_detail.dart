@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:my_app/view/widget/detail_info.dart';
+import 'package:my_app/view/proposal_view/proposal_view.dart';
+import 'package:my_app/view/widget/detail_components/detail_info.dart';
 import '../widget/app_bar/top_app_bar_left.dart';
 import 'detail_product.dart';
 
-class ProposalDetail extends StatelessWidget {
+class ProposalDetail extends ConsumerWidget {
    ProposalDetail({Key? key}) : super(key: key);
 
   final TextEditingController _deliveryDate =  TextEditingController(text: '3');
@@ -14,7 +16,7 @@ class ProposalDetail extends StatelessWidget {
       TextEditingController(text: 'Cari Hesap');
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
     List<DropdownMenuEntry<String>> dropDownMenuPaymentType =
         ["Cari Hesap", "DBS"].map((String value) {
@@ -36,9 +38,14 @@ class ProposalDetail extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: const TopAppBarLeft(
+      appBar: TopAppBarLeft(
         title: 'Teklif No: 1533',
         icon: Icons.chat_bubble_outline,
+        onPressed: () => {
+          Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) =>  const ProposalView())
+          )
+        },
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -59,6 +66,7 @@ class ProposalDetail extends StatelessWidget {
               SizedBox(
                 width: width,
                 child: const DetailInfo(
+                  className: 'proposal',
                   row1: "15.09.2023", 
                   row2: "15.09.2023", 
                   row3: "30 gun", 
@@ -77,14 +85,15 @@ class ProposalDetail extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child:  DropdownMenu<int>(
-                        controller: _deliveryDate,
                         menuHeight: 200,
                         width: 140,
+                        enableFilter: false,
+                        enableSearch: false,
                         inputDecorationTheme: InputDecorationTheme(
                           filled: true,
                           fillColor: Theme.of(context).colorScheme.onPrimary,
                           constraints: const BoxConstraints(maxHeight: 40),
-                          contentPadding: EdgeInsets.only(left: 10.0),
+                          contentPadding: const EdgeInsets.only(left: 10.0),
                           floatingLabelAlignment: FloatingLabelAlignment.start,
                           border: const OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
@@ -99,7 +108,12 @@ class ProposalDetail extends StatelessWidget {
                           alignment: AlignmentGeometry.lerp(
                               Alignment.bottomLeft, Alignment.bottomLeft, 0.3,
                           ),
+                          surfaceTintColor: MaterialStateProperty.all<Color>(
+                              Theme.of(context).colorScheme.onPrimary),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Theme.of(context).colorScheme.onPrimary),
                         ),
+                        
                         dropdownMenuEntries: dropDownMenuDate,
                       ),
                     ),
@@ -123,7 +137,6 @@ class ProposalDetail extends StatelessWidget {
                           ),
                           border: const OutlineInputBorder(),
                         ),
-                        readOnly: true,
                       ),
                     ),
                   ],
@@ -138,6 +151,7 @@ class ProposalDetail extends StatelessWidget {
                   width: width - 50,
                 controller: _paymentDueDate,
                 menuHeight: 100,
+                enableSearch: false,
                 inputDecorationTheme: InputDecorationTheme(
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.onPrimary,
@@ -154,9 +168,14 @@ class ProposalDetail extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                   ),
                 menuStyle: MenuStyle(
+                  mouseCursor: MaterialStateMouseCursor.clickable,
                   alignment: AlignmentGeometry.lerp(
                       Alignment.bottomLeft, Alignment.bottomLeft, 0.5,
                   ),
+                  surfaceTintColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).colorScheme.onPrimary),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).colorScheme.onPrimary),
                 ),
                 dropdownMenuEntries: dropDownMenuPaymentType,
                               ),
@@ -172,12 +191,9 @@ class ProposalDetail extends StatelessWidget {
                   ),
                 ),
               ),
-              const Divider(thickness: 3,),
+              const Divider(thickness: 2),
               ListView.builder(
-                shrinkWrap:
-                    true, // makes ListView size itself according to children
-                physics:
-                    NeverScrollableScrollPhysics(),  //close the scrool for parent singleChildScrollView
+                shrinkWrap: true, // makes ListView size itself according to children
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   return ProposalBody(

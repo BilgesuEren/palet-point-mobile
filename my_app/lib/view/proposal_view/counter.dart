@@ -45,6 +45,12 @@ class CounterState extends State<Counter> {
   }
 
   @override
+  void dispose() {
+    stopTimer();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
     final days = strDigits(duration.inDays); // <-- SEE HERE

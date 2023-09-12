@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class TopAppBarLeft extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final IconData? icon;
+  void Function() onPressed;
 
-  const TopAppBarLeft({ 
+   TopAppBarLeft({ 
     Key? key,
     required this.title,
     required this.icon,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class TopAppBarLeft extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).colorScheme.onSecondary,
           ),
         onPressed: () {
-          Navigator.pop(context);
+          onPressed();
         },
       ),
       title: Text(
@@ -39,6 +41,7 @@ class TopAppBarLeft extends StatelessWidget implements PreferredSizeWidget {
             color: Theme.of(context).colorScheme.onSecondary,
             ),
           onPressed: () {
+            onPressed();
           },
         ),
         

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:my_app/view/order_view/order_detail.dart';
 import '../widget/index_list_tile.dart';
-import 'counter.dart';
-import 'proposal_detail.dart';
 
-class Proposal extends StatelessWidget {
-  const Proposal({Key? key}) : super(key: key);
+class OrderView extends StatelessWidget {
+  const OrderView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +13,12 @@ class Proposal extends StatelessWidget {
         title: 'Headline',
         subtitle: 'Subtitle',
         svgPath: 'assets/alert.svg',
-        trailing: const Counter(),
+        trailing: const Icon(
+          Icons.shape_line
+          ),
         onTap: () {
-          Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) =>  ProposalDetail())
-          );
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => OrderDetail()));
         },
       ),
     );

@@ -5,5 +5,6 @@ ThemeData theme = ThemeData(
   brightness: Brightness.light,
   useMaterial3: true,
   colorScheme: themeColor,
+  unselectedWidgetColor: themeColor.onSurfaceVariant,
 );
 

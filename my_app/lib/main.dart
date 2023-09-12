@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_i18n/loaders/decoders/yaml_decode_strategy.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_app/theme/theme.dart';
 import 'package:my_app/view/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp()
+    ));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,12 +21,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme:theme,
       localizationsDelegates: [
         FlutterI18nDelegate(
           missingTranslationHandler: (key, locale) {
-            print(
-                "--- Missing Key: $key, languageCode: ${locale!.languageCode}");
+            print("--- Missing Key: $key, languageCode: ${locale!.languageCode}");
           },
           translationLoader: FileTranslationLoader(
               fallbackFile: 'tr',

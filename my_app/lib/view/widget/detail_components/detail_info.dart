@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class DetailInfo extends StatelessWidget {
+  final String className;
   final String row1;
   final String row2;
   final String row3;
   final String row4;
 
-  const DetailInfo({
+   const DetailInfo({
     Key? key,
+    required this.className,
     required this.row1,
     required this.row2,
     required this.row3,
@@ -30,7 +32,7 @@ class DetailInfo extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(bottom: 10.0),
               child: Text(
-                FlutterI18n.translate(context, 'tr.detail.proposal.row_1'),
+                FlutterI18n.translate(context, 'tr.detail_info.$className.row_1'),
                 style: Theme.of(context).textTheme.bodyMedium
               ),
             ),
@@ -44,7 +46,7 @@ class DetailInfo extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(bottom: 10.0),
               child: Text(
-                FlutterI18n.translate(context, 'tr.detail.proposal.row_2'),
+                FlutterI18n.translate(context, 'tr.detail_info.$className.row_2'),
                 style: Theme.of(context).textTheme.bodyMedium
               ),
             ),
@@ -60,7 +62,7 @@ class DetailInfo extends StatelessWidget {
         TableRow(
           children: [
             Text(
-              FlutterI18n.translate(context, 'tr.detail.proposal.row_3'),
+              FlutterI18n.translate(context, 'tr.detail_info.$className.row_3'),
               style: Theme.of(context).textTheme.bodyMedium
             ),
             Text(
@@ -68,7 +70,7 @@ class DetailInfo extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium
             ),
             Text(
-              FlutterI18n.translate(context, 'tr.detail.proposal.row_4'),
+              FlutterI18n.translate(context, 'tr.detail_info.$className.row_4'),
               style: Theme.of(context).textTheme.bodyMedium
             ),
             Text(

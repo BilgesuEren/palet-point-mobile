@@ -1,7 +1,25 @@
 tr:
-  detail:
+  detail_table:
+    row_1: "Ürün"
+    row_2: "Miktar"
+    row_3: "Fiyat"
+    row_4: "Toplam"
+  detail_info:
     proposal: 
       row_1: "Talep Tarihi:"
       row_2: "Termin:"
       row_3: "Ödeme Vadesi:"
       row_4: "Nakliye:"
+    order:
+      row_1: "Sipariş Tarihi:"
+      row_2: "Termin:"
+      row_3: "Ödeme Vadesi:"
+      row_4: "Nakliye:"
+      row_5: "Ödeme Şekli:"
+    invoice:
+      row_1: "Fatura Tarihi:"
+      row_2: "Ödeme Tarihi:"
+      row_3: "Sipariş No:"
+      row_4: "Ödeme Şekli:"
+      
+
